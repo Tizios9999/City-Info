@@ -1,7 +1,28 @@
-h1 {
-    color: red;
+$primary-color: rgb(39, 71, 112);
+$secondary-color: rgb(171, 147, 48);
+$tertiary-color: rgb(171, 89, 48);
+
+header {
+    background-color: $primary-color;
+
+    h1 {
+        color: white;
+    }
+
+    .mode-btn-wrapper {
+        display: flex;
+        justify-content: center;
+        .mode-btn {
+            border: 1px solid black;
+            border-radius: 5px;
+            height: 30px;
+            background-color: $secondary-color;
+            padding: 15px;
+        }
+    }
 }
 
+
 .test-class {
-    color: rgb(150, 99, 3);
+    color: $tertiary-color;
 }
