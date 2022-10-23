@@ -14,7 +14,12 @@ module.exports = {
         },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({})
+        new HtmlWebpackPlugin({
+            hash: true,
+            title: 'City Info App',
+            template: './src/index.html',
+            filename: '../dist/index.html'
+        })
     ],
     output: {
         filename: '[name].bundle.js',
