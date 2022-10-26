@@ -1,28 +1,116 @@
-$primary-color: rgb(39, 71, 112);
-$secondary-color: rgb(171, 147, 48);
-$tertiary-color: rgb(171, 89, 48);
+$first-color: rgb(34, 102, 102);
+$second-color: rgb(170, 57, 57);
+$third-color: rgb(45, 136, 45);
+$fourth-color: rgb(170, 108, 57);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 header {
-    background-color: $primary-color;
+    width: 100%;
+    .title-wrapper {
+        background-color: $first-color;
+        margin: 0 auto;
+        h1 {
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
 
-    h1 {
-        color: white;
     }
 
-    .mode-btn-wrapper {
+    h2 {
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .search-btn-wrapper {
         display: flex;
         justify-content: center;
-        .mode-btn {
+        
+
+        .search-btn {
             border: 1px solid black;
             border-radius: 5px;
             height: 30px;
-            background-color: $secondary-color;
-            padding: 15px;
+            background-color: $third-color;
+            line-height: 30px;
+            padding: 0 20px;
+            color: white;
+            margin-left: 5px;
+            font-size: 20px;
+        }
+
+        .search-bar {
+            width: 300px;
+            font-size: 20px;
+        }
+    }
+
+    .compare-city-wrapper {
+        margin-top: 60px;
+        background-color: pink;
+    }
+}
+
+main {
+    margin-top: 60px;
+    width: 100%;
+    .cards-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 30px;
+
+        .card {
+            background-color: white;
+            width: 400px;
+            min-height: 200px;
+            padding: 20px;
+            border: 1px solid gray;
+            margin: 10px;
+
+            .urban-scores-wrapper {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                height: 80%;
+                gap: 10px;
+                
+                .bar {
+                    background-color: lightgray;
+                    width: 90%;
+                    height: 20px;
+                    position: relative;
+    
+                    .meter-fill {
+                        position: absolute;
+                        overflow: hidden;
+                        height: 100%;
+                        
+                    }
+    
+                    .urban-one {
+                        background-color: $second-color;
+                        width: 85%;
+                    }
+    
+                    .urban-two {
+                        background-color: $fourth-color;
+                        width: 70%;
+                    }
+            }
+            
+            }
         }
     }
 }
 
-
 .test-class {
-    color: $tertiary-color;
+    color: $second-color;
 }

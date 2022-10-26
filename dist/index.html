@@ -4,18 +4,48 @@
     <meta charset="utf-8" />
     <title>City Info App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script defer src="app.bundle.js?5c1c2ac41a9c6796c40c"></script><script defer src="secondary.bundle.js?5c1c2ac41a9c6796c40c"></script></head>
+  <script defer src="app.bundle.js?ba9ee1dcd1a87374ee32"></script><script defer src="secondary.bundle.js?ba9ee1dcd1a87374ee32"></script></head>
   <body>
     <header>
-      <h1>City Lifestyle Info App</h1>
-      <div class="mode-btn-wrapper">
-        <div class="mode-btn">Browse a city</div>
-        <div class="mode-btn">Compare two cities</div>
+      <div class="title-wrapper">
+        <h1>City Lifestyle Info App</h1>
+      </div>
+      <h2>Search for a city</h2>
+      <div class="search-btn-wrapper">
+        <input class="search-bar" type="text" placeholder="Enter a city" />
+        <div class="search-btn">Submit</div>
+      </div>
+      <div class="compare-city-wrapper">
+        <h2>Select another city to compare to</h2>
+        <div class="search-btn-wrapper">
+          <input class="search-bar" type="text" placeholder="Enter a city" />
+          <div class="search-btn">Submit</div>
+        </div>
       </div>
     </header>
 
     <main>
-      <div></div>
+      <div class="cards-wrapper">
+        <div class="card">
+          <h4 class="category-title">CATEGORY</h4>
+          <div class="urban-scores-wrapper">
+            <div class="score-wrapper">
+              <div class="score-label">
+                <em>Urban area one: </em><strong>8.5</strong>/10
+              </div>
+              <div class="bar"><span class="meter-fill urban-one"></span></div>
+            </div>
+            <div class="score-wrapper">
+              <div class="score-label">
+                <em>Urban area two: </em><strong>7</strong>/10
+              </div>
+              <div class="bar"><span class="meter-fill urban-two"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">Text inside</div>
+      </div>
     </main>
   </body>
 </html>
