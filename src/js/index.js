@@ -1,7 +1,7 @@
 import '../sass/style.scss';
 import testConsole from './secondary';
 
-const cardsWrapper = document.querySelector('.cards-wrapper')
+const cardsWrapper = document.querySelector('.cards-wrapper');
 
 let urbanList = [
         {
@@ -33,16 +33,18 @@ let urbanList = [
 const firstObject = {
     name: 'City One',
     score: 8.5343,
-    position: 'urban-one',
+    position: 'urban-0',
 }
 
 const secondObject = {
     name: 'City Two',
     score: 7.03223,
-    position: 'urban-two',
+    position: 'urban-1',
 }
 
-function drawCard(category, objOne, secondObj) {
+const objArr = [firstObject, secondObject];
+
+function drawCard(category, urbanArr) {
 
     const card = document.createElement('div');
     const categoryTitleNode = document.createElement('h4');
@@ -57,10 +59,10 @@ function drawCard(category, objOne, secondObj) {
     const urbanScoresWrapper = document.createElement('div');
     urbanScoresWrapper.classList.add('urban-scores-wrapper');
     card.appendChild(urbanScoresWrapper);
+    
+    urbanScoresWrapper.appendChild(renderScoreSection(urbanArr[0].name, urbanArr[0].score, urbanArr[0].position));
 
-    urbanScoresWrapper.appendChild(renderScoreSection(objOne.name, objOne.score, objOne.position));
-
-    urbanScoresWrapper.appendChild(renderScoreSection(secondObj.name, secondObj.score, secondObj.position));
+    urbanScoresWrapper.appendChild(renderScoreSection(urbanArr[1].name, urbanArr[1].score, urbanArr[1].position));
 
     return card;
 }
@@ -114,7 +116,7 @@ function roundScore(score) {
     return Math.round(score*10)/10;
 }
 
-cardsWrapper.appendChild(drawCard('HEALTHCARE', firstObject, secondObject));
-cardsWrapper.appendChild(drawCard('POLITICS', firstObject, secondObject));
+cardsWrapper.appendChild(drawCard('HEALTHCARE', objArr));
+cardsWrapper.appendChild(drawCard('POLITICS', objArr));
 
 testConsole();
