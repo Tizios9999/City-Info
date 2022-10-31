@@ -30,19 +30,19 @@ let urbanList = [
         }, 
 ];
 
-const firstObject = {
+// The following objects are created for every category
+
+const firstCityObject = {
     name: 'City One',
     score: 8.5343,
-    position: 'urban-0',
 }
 
-const secondObject = {
+const secondCityObject = {
     name: 'City Two',
     score: 7.03223,
-    position: 'urban-1',
 }
 
-const objArr = [firstObject, secondObject];
+const categoryCardArr = [firstCityObject, secondCityObject];
 
 function drawCard(category, urbanArr) {
 
@@ -59,10 +59,10 @@ function drawCard(category, urbanArr) {
     const urbanScoresWrapper = document.createElement('div');
     urbanScoresWrapper.classList.add('urban-scores-wrapper');
     card.appendChild(urbanScoresWrapper);
-    
-    urbanScoresWrapper.appendChild(renderScoreSection(urbanArr[0].name, urbanArr[0].score, urbanArr[0].position));
 
-    urbanScoresWrapper.appendChild(renderScoreSection(urbanArr[1].name, urbanArr[1].score, urbanArr[1].position));
+    urbanArr.forEach(function(urbanObj, i) {
+        urbanScoresWrapper.appendChild(renderScoreSection(urbanObj, i));
+    })
 
     return card;
 }
@@ -73,25 +73,25 @@ function renderBar(urbanCounter, points) {
     bar.classList.add('bar');
     const meterFill = document.createElement('span');
     meterFill.classList.add('meter-fill');
-    meterFill.classList.add(urbanCounter); // needs to be a parameter to avoid repetitions
+    meterFill.classList.add(`urban-${urbanCounter}`); // needs to be a parameter to avoid repetitions
     meterFill.style.width = `${fillWidth}%`; // width must come from API data
     bar.appendChild(meterFill);
 
     return bar;
 }
 
-function renderUrbanScoreLabel(urbanAreaName, categoryScore) {
+function renderUrbanScoreLabel(urbanObj) {
     const scoreLabel = document.createElement('div');
     scoreLabel.classList.add('score-label');
     const urbanAreaLabel = document.createElement('em');
-        const urbanAreaTextNode = document.createTextNode(`${urbanAreaName}: `); // needs to be replaced with data from API
+        const urbanAreaTextNode = document.createTextNode(`${urbanObj.name}: `); // needs to be replaced with data from API
         urbanAreaLabel.appendChild(urbanAreaTextNode);
         scoreLabel.appendChild(urbanAreaLabel);
 
         // add the points, first part in strong tags
 
         const numberScoreLabel = document.createElement('strong');
-        const numberScoreTextNode = document.createTextNode(`${roundScore(categoryScore)}`); // needs to be replaced with data from API
+        const numberScoreTextNode = document.createTextNode(`${roundScore(urbanObj.score)}`); // needs to be replaced with data from API
         numberScoreLabel.appendChild(numberScoreTextNode);
         scoreLabel.appendChild(numberScoreLabel);
         const outOfTenLabel = document.createTextNode("/10");
@@ -100,14 +100,14 @@ function renderUrbanScoreLabel(urbanAreaName, categoryScore) {
         return scoreLabel;
 }
 
-function renderScoreSection(urbanAreaName, points, counter) {
+function renderScoreSection(urbanObj, counter) {
 
     const scoreWrapper = document.createElement('div');
     scoreWrapper.classList.add('score-wrapper');
     
-    scoreWrapper.appendChild(renderUrbanScoreLabel(urbanAreaName, points));
+    scoreWrapper.appendChild(renderUrbanScoreLabel(urbanObj));
 
-    scoreWrapper.appendChild(renderBar(counter, points));
+    scoreWrapper.appendChild(renderBar(counter, urbanObj.points));
 
     return scoreWrapper;
 }
@@ -116,7 +116,8 @@ function roundScore(score) {
     return Math.round(score*10)/10;
 }
 
-cardsWrapper.appendChild(drawCard('HEALTHCARE', objArr));
-cardsWrapper.appendChild(drawCard('POLITICS', objArr));
+cardsWrapper.appendChild(drawCard('HEALTHCARE', categoryCardArr));
+cardsWrapper.appendChild(drawCard('POLITICS', categoryCardArr));
+cardsWrapper.appendChild(drawCard('ECONOMY', categoryCardArr));
 
 testConsole();
