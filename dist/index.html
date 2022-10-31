@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>City Info App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script defer src="app.bundle.js?09ab2c9e1a4b1b82a419"></script><script defer src="secondary.bundle.js?09ab2c9e1a4b1b82a419"></script></head>
+  <script defer src="app.bundle.js?4fed0d36df1f45d8a841"></script><script defer src="secondary.bundle.js?4fed0d36df1f45d8a841"></script></head>
   <body>
     <header>
       <div class="title-wrapper">
@@ -12,14 +12,30 @@
       </div>
       <h2>Search for a city</h2>
       <div class="search-btn-wrapper">
-        <input class="search-bar" type="text" placeholder="Enter a city" />
-        <div class="search-btn">Submit</div>
+        <form autocomplete="off">
+          <input
+            id="first-city-input"
+            name="first-city-input"
+            class="search-bar"
+            type="text"
+            placeholder="Enter a city"
+          />
+          <div class="search-btn">Submit</div>
+        </form>
       </div>
       <div class="compare-city-wrapper">
         <h2>Select another city to compare to</h2>
         <div class="search-btn-wrapper">
-          <input class="search-bar" type="text" placeholder="Enter a city" />
-          <div class="search-btn">Submit</div>
+          <form autocomplete="off">
+            <input
+              id="second-city-input"
+              name="second-city-input"
+              class="search-bar"
+              type="text"
+              placeholder="Enter a city"
+            />
+            <div class="search-btn">Submit</div>
+          </form>
         </div>
       </div>
     </header>

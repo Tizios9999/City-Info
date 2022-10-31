@@ -30,6 +30,14 @@ let urbanList = [
         }, 
 ];
 
+function suggestCities(searchString, objArr) {
+    objArr.forEach(function(entry) {
+        if (entry.name.includes(searchString)) {
+            console.log(entry.name);
+        }
+    } )
+}
+
 // The following objects are created for every category
 
 const firstCityObject = {
@@ -119,5 +127,7 @@ function roundScore(score) {
 cardsWrapper.appendChild(drawCard('HEALTHCARE', categoryCardArr));
 cardsWrapper.appendChild(drawCard('POLITICS', categoryCardArr));
 cardsWrapper.appendChild(drawCard('ECONOMY', categoryCardArr));
+
+suggestCities("t", urbanList);
 
 testConsole();

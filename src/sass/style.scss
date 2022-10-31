@@ -29,9 +29,11 @@ header {
     }
 
     .search-btn-wrapper {
-        display: flex;
-        justify-content: center;
         
+        form {
+            display: flex;
+            justify-content: center;
+        }
 
         .search-btn {
             border: 1px solid black;
