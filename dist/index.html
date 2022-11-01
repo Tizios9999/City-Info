@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>City Info App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script defer src="app.bundle.js?66b86b66f47318e998b8"></script><script defer src="secondary.bundle.js?66b86b66f47318e998b8"></script></head>
+  <script defer src="app.bundle.js?347798ade9091e6b28fb"></script><script defer src="secondary.bundle.js?347798ade9091e6b28fb"></script></head>
   <body>
     <header class="page-header">
       <div class="title-wrapper">
@@ -15,14 +15,20 @@
         <form autocomplete="off">
           <input
             id="first-city-input"
-            name="first-city-input"
+            name="first-city"
             class="search-bar"
             type="text"
             placeholder="Enter a city"
             list="search-city-suggestions"
           />
           <datalist id="search-city-suggestions"> </datalist>
-          <button class="search-btn" id="first-city-submit-btn">Submit</button>
+          <button
+            class="search-btn"
+            name="first-city"
+            id="first-city-submit-btn"
+          >
+            Submit
+          </button>
         </form>
       </div>
       <div class="compare-city-wrapper">
@@ -31,7 +37,7 @@
           <form autocomplete="off">
             <input
               id="second-city-input"
-              name="second-city-input"
+              name="second-city"
               class="search-bar"
               type="text"
               placeholder="Enter a city"
@@ -39,7 +45,11 @@
               onkeyup=""
             />
             <datalist id="second-city-suggestions"> </datalist>
-            <button class="search-btn" id="second-city-submit-btn">
+            <button
+              class="search-btn"
+              name="second-city"
+              id="second-city-submit-btn"
+            >
               Submit
             </button>
           </form>

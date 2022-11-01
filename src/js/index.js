@@ -66,6 +66,19 @@ function createDatalistOptions(datalistId, arr) {
 
 }
 
+function submitUrbanLink(cityName, cityList) {
+    let found = false;
+    console.log(cityName);
+    for (let i=0; i<cityList.length; i++) {
+        if (cityName == cityList[i].name) {
+            console.log(cityList[i].href);
+            found = true;
+            return;
+        }
+    }
+    if (!found) console.log('Not found!');
+}
+
 // Selectors
 
 const headerElement = document.querySelector('.page-header');
@@ -85,6 +98,9 @@ headerElement.addEventListener('click', function(e) {
     if (e.target.classList.contains('search-btn')) {
         e.preventDefault();
         console.log(e.target.id);
+        let selectedInput = e.target.id == "first-city-submit-btn" ? "first-city-input" : "second-city-input";
+        
+        submitUrbanLink(document.getElementById(selectedInput).value, urbanList);
     }
 } );
 
