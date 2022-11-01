@@ -54,6 +54,9 @@ function filterCities(searchString, objArr) {
 function createDatalistOptions(datalistId, arr) { 
     const datalist = document.getElementById(datalistId);
     datalist.innerHTML = ""; // the datalist options are erased first
+
+    if (!arr) return;
+
     arr.forEach(function(item) {
         let option = document.createElement('option');
         option.value = item;
