@@ -80,7 +80,8 @@ headerElement.addEventListener('input', function(e) {
 
 headerElement.addEventListener('click', function(e) {
     if (e.target.classList.contains('search-btn')) {
-        alert("Hai cliccato un bottone!");
+        e.preventDefault();
+        console.log(e.target.id);
     }
 } );
 

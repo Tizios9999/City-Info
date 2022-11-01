@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>City Info App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script defer src="app.bundle.js?b0f6e26ff561308ef0dd"></script><script defer src="secondary.bundle.js?b0f6e26ff561308ef0dd"></script></head>
+  <script defer src="app.bundle.js?91e4f11c57497b9a643f"></script><script defer src="secondary.bundle.js?91e4f11c57497b9a643f"></script></head>
   <body>
     <header class="page-header">
       <div class="title-wrapper">
@@ -22,7 +22,7 @@
             list="search-city-suggestions"
           />
           <datalist id="search-city-suggestions"> </datalist>
-          <button class="search-btn">Submit</button>
+          <button class="search-btn" id="first-city-submit-btn">Submit</button>
         </form>
       </div>
       <div class="compare-city-wrapper">
@@ -39,7 +39,9 @@
               onkeyup=""
             />
             <datalist id="second-city-suggestions"> </datalist>
-            <button class="search-btn">Submit</button>
+            <button class="search-btn" id="second-city-submit-btn">
+              Submit
+            </button>
           </form>
         </div>
       </div>
