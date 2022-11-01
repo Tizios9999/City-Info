@@ -30,13 +30,60 @@ let urbanList = [
         }, 
 ];
 
+// Search bar related functions
+
 function suggestCities(searchString, objArr) {
-    objArr.forEach(function(entry) {
-        if (entry.name.includes(searchString)) {
+    
+    objArr.forEach(function(entry) { // will be a filter method later on that will return the list of results
+        if (entry.name.toLowerCase().includes(searchString.toLowerCase())) {
             console.log(entry.name);
         }
     } )
 }
+
+function filterCities(searchString, objArr) {
+    
+    if (searchString == "") return;
+    let filteredList = objArr.map(objArr => objArr.name).filter(entry => entry.toLowerCase().includes(searchString.toLowerCase()));
+    
+    if (filteredList.length == 1 && filteredList[0].toLowerCase() === searchString.toLowerCase()) return; // this will ensure that the list of suggestions will be empty when I don't need it anymore.
+    
+    return filteredList;
+    } 
+
+function createDatalistOptions(datalistId, arr) { 
+    const datalist = document.getElementById(datalistId);
+    datalist.innerHTML = ""; // the datalist options are erased first
+    arr.forEach(function(item) {
+        let option = document.createElement('option');
+        option.value = item;
+        datalist.appendChild(option);
+    })
+
+
+}
+
+// Selectors
+
+const headerElement = document.querySelector('.page-header');
+
+// Forms Event Listeners
+
+headerElement.addEventListener('input', function(e) {
+    if (e.target.classList.contains("search-bar")) {
+        let filteredList = filterCities(e.target.value, urbanList);
+        let selectedList = e.target.id == "first-city-input" ? "search-city-suggestions" : "second-city-suggestions";
+        
+        createDatalistOptions(selectedList,filteredList);
+    }
+} );
+
+headerElement.addEventListener('click', function(e) {
+    if (e.target.classList.contains('search-btn')) {
+        alert("Hai cliccato un bottone!");
+    }
+} );
+
 
 // The following objects are created for every category
 
@@ -128,6 +175,8 @@ cardsWrapper.appendChild(drawCard('HEALTHCARE', categoryCardArr));
 cardsWrapper.appendChild(drawCard('POLITICS', categoryCardArr));
 cardsWrapper.appendChild(drawCard('ECONOMY', categoryCardArr));
 
-suggestCities("t", urbanList);
+suggestCities('N', urbanList);
+console.log("-------------------");
+
 
 testConsole();

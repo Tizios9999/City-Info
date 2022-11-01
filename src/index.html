@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <header>
+    <header class="page-header">
       <div class="title-wrapper">
         <h1>City Lifestyle Info App</h1>
       </div>
@@ -19,8 +19,10 @@
             class="search-bar"
             type="text"
             placeholder="Enter a city"
+            list="search-city-suggestions"
           />
-          <div class="search-btn">Submit</div>
+          <datalist id="search-city-suggestions"> </datalist>
+          <button class="search-btn">Submit</button>
         </form>
       </div>
       <div class="compare-city-wrapper">
@@ -33,8 +35,11 @@
               class="search-bar"
               type="text"
               placeholder="Enter a city"
+              list="second-city-suggestions"
+              onkeyup=""
             />
-            <div class="search-btn">Submit</div>
+            <datalist id="second-city-suggestions"> </datalist>
+            <button class="search-btn">Submit</button>
           </form>
         </div>
       </div>
