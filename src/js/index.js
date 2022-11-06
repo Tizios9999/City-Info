@@ -1,34 +1,151 @@
 import '../sass/style.scss';
 import testConsole from './secondary';
 
-const cardsWrapper = document.querySelector('.cards-wrapper');
+// Test variables
 
 let urbanList = [
-        {
-            "href": "link1", 
-            "name": "San Diego"
-        }, 
-        {
-            "href": "link2", 
-            "name": "Domodossola"
-        }, 
-        {
-            "href": "link3", 
-            "name": "Milano"
-        }, 
-        {
-            "href": "link4", 
-            "name": "Mestre"
-        }, 
-        {
-            "href": "link5", 
-            "name": "San Francisco"
-        }, 
-        {
-            "href": "link6", 
-            "name": "Santiago"
-        }, 
+    {
+        "href": "https://api.teleport.org/api/urban_areas/slug:aarhus/", 
+        "name": "Aarhus"
+    }, 
+    {
+        "href": "https://api.teleport.org/api/urban_areas/slug:adelaide/", 
+        "name": "Adelaide"
+    }, 
+    {
+        "href": "https://api.teleport.org/api/urban_areas/slug:albuquerque/", 
+        "name": "Albuquerque"
+    }, 
+    {
+        "href": "https://api.teleport.org/api/urban_areas/slug:almaty/", 
+        "name": "Almaty"
+    }, 
+    {
+        "href": "https://api.teleport.org/api/urban_areas/slug:amsterdam/", 
+        "name": "Amsterdam"
+    }, 
+    {
+        "href": "https://api.teleport.org/api/urban_areas/slug:anchorage/", 
+        "name": "Anchorage"
+    }, 
+    {
+        "href": "https://api.teleport.org/api/urban_areas/slug:ankara/", 
+        "name": "Ankara"
+    }, 
 ];
+
+let firstCityScores = [
+    {
+        "color":"#040445",
+        "name":"Housing",
+        "score_out_of_10": 6.3095, 
+    },
+    {
+        "color":"#f3c32c",
+        "name":"Cost of Living",
+        "score_out_of_10": 4.692,
+    },
+    {
+        "color":"#34565c",
+        "name":"Startups",
+        "score_out_of_10": 3.1365,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"Venture Capital",
+        "score_out_of_10": 2.64,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"Travel Connectivity",
+        "score_out_of_10": 1.17765,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"Business Freedom",
+        "score_out_of_10": 9.399666667,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"TEST X",
+        "score_out_of_10": 2,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"TEST Y",
+        "score_out_of_10": 5.512,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"TEST Y",
+        "score_out_of_10": 5.512,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"TEST Y",
+        "score_out_of_10": 5.512,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"TEST Y",
+        "score_out_of_10": 5.512,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"TEST Y",
+        "score_out_of_10": 5.512,
+    },
+];
+
+let secondCityScores = [
+    {
+        "color":"#f3c32c",
+        "name":"Housing",
+        "score_out_of_10": 5.1945, 
+    },
+    {
+        "color":"#f3c32c",
+        "name":"Cost of Living",
+        "score_out_of_10": 4.801,
+    },
+    {
+        "color":"#222222",
+        "name":"Startups",
+        "score_out_of_10": 5.1945,
+    },
+    {
+        "color":"#444444",
+        "name":"Venture Capital",
+        "score_out_of_10": 3.286,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"Travel Connectivity",
+        "score_out_of_10": 6.683,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"Business Freedom",
+        "score_out_of_10": 5.512,
+    },
+    {
+        "color":"#f3c32c",
+        "name":"TEST Y",
+        "score_out_of_10": 5.512,
+    },
+];
+
+let citiesToCompare = [null, null]; // These values will change depending on the input submitted for the city search
+
+// Helper functions
+
+function createHtmlElement(tag, classes = '', htmlContent = '') {
+    const el = document.createElement(`${tag}`);
+    if (classes) el.className = classes;
+    el.innerHTML = htmlContent;
+
+    return el;
+}
 
 // Search bar related functions
 
@@ -66,13 +183,15 @@ function createDatalistOptions(datalistId, arr) {
 
 }
 
-function submitUrbanLink(cityName, cityList) {
+function submitUrbanLink(cityName, cityList, pos) {
     let found = false;
     console.log(cityName);
     for (let i=0; i<cityList.length; i++) {
         if (cityName == cityList[i].name) {
-            console.log(cityList[i].href);
+            console.log(`${cityList[i].href}scores/`);
             found = true;
+            citiesToCompare[pos] = cityName;
+            console.log(citiesToCompare);
             return;
         }
     }
@@ -82,6 +201,7 @@ function submitUrbanLink(cityName, cityList) {
 // Selectors
 
 const headerElement = document.querySelector('.page-header');
+const cardsWrapper = document.querySelector('.cards-wrapper');
 
 // Forms Event Listeners
 
@@ -99,90 +219,63 @@ headerElement.addEventListener('click', function(e) {
         e.preventDefault();
         console.log(e.target.id);
         let selectedInput = e.target.id == "first-city-submit-btn" ? "first-city-input" : "second-city-input";
-        
-        submitUrbanLink(document.getElementById(selectedInput).value, urbanList);
+        let selectedPos = selectedInput == "first-city-input" ? 0 : 1;
+
+        submitUrbanLink(document.getElementById(selectedInput).value, urbanList, selectedPos);
     }
 } );
 
+function drawCard(scoresArr, name) {
 
-// The following objects are created for every category
+    const card = createHtmlElement('div', 'card');
+    const cityTitle = createHtmlElement('h4', 'city-title', name);
+    const urbanScoresWrapper = createHtmlElement('div', 'urban-scores-wrapper');
+    card.append(cityTitle, urbanScoresWrapper);
 
-const firstCityObject = {
-    name: 'City One',
-    score: 8.5343,
-}
+    // From here I need to create an individual score for every category
 
-const secondCityObject = {
-    name: 'City Two',
-    score: 7.03223,
-}
-
-const categoryCardArr = [firstCityObject, secondCityObject];
-
-function drawCard(category, urbanArr) {
-
-    const card = document.createElement('div');
-    const categoryTitleNode = document.createElement('h4');
-    const categoryTitleText = document.createTextNode(category); // needs to be replaced with data from API
-    card.classList.add('card');
-
-    // Add category title
-    card.appendChild(categoryTitleNode);
-    categoryTitleNode.appendChild(categoryTitleText);
-    
-    // Add Urban Scores Wrapper below the category title
-    const urbanScoresWrapper = document.createElement('div');
-    urbanScoresWrapper.classList.add('urban-scores-wrapper');
-    card.appendChild(urbanScoresWrapper);
-
-    urbanArr.forEach(function(urbanObj, i) {
-        urbanScoresWrapper.appendChild(renderScoreSection(urbanObj, i));
+    scoresArr.forEach(function(categoryScore) {
+        urbanScoresWrapper.append(renderScoreSection(categoryScore));
     })
+    
 
     return card;
 }
 
-function renderBar(urbanCounter, points) {
+function renderBar(categoryScore) {
     const bar = document.createElement('div');
-    const fillWidth = Math.round(points*10);
+    const fillWidth = Math.round(categoryScore.score_out_of_10*10);
     bar.classList.add('bar');
     const meterFill = document.createElement('span');
     meterFill.classList.add('meter-fill');
-    meterFill.classList.add(`urban-${urbanCounter}`); // needs to be a parameter to avoid repetitions
+    meterFill.style.backgroundColor = categoryScore.color;
     meterFill.style.width = `${fillWidth}%`; // width must come from API data
     bar.appendChild(meterFill);
 
     return bar;
 }
 
-function renderUrbanScoreLabel(urbanObj) {
-    const scoreLabel = document.createElement('div');
-    scoreLabel.classList.add('score-label');
-    const urbanAreaLabel = document.createElement('em');
-        const urbanAreaTextNode = document.createTextNode(`${urbanObj.name}: `); // needs to be replaced with data from API
-        urbanAreaLabel.appendChild(urbanAreaTextNode);
-        scoreLabel.appendChild(urbanAreaLabel);
+function renderUrbanScoreLabel(categoryScore) {
+    const scoreLabel = createHtmlElement('div', 'score-label');
+    const categoryLabel = createHtmlElement('em', '',`${categoryScore.name}: `);
 
-        // add the points, first part in strong tags
+        scoreLabel.appendChild(categoryLabel);
 
-        const numberScoreLabel = document.createElement('strong');
-        const numberScoreTextNode = document.createTextNode(`${roundScore(urbanObj.score)}`); // needs to be replaced with data from API
-        numberScoreLabel.appendChild(numberScoreTextNode);
-        scoreLabel.appendChild(numberScoreLabel);
-        const outOfTenLabel = document.createTextNode("/10");
-        scoreLabel.appendChild(outOfTenLabel);
+        const numberScoreLabel = createHtmlElement('strong', '',`${roundScore(categoryScore.score_out_of_10)}`)  // needs to be replaced with data from API
+
+        scoreLabel.append(numberScoreLabel, '/10');
 
         return scoreLabel;
 }
 
-function renderScoreSection(urbanObj, counter) {
+function renderScoreSection(categoryScore) {
 
     const scoreWrapper = document.createElement('div');
     scoreWrapper.classList.add('score-wrapper');
     
-    scoreWrapper.appendChild(renderUrbanScoreLabel(urbanObj));
+    scoreWrapper.appendChild(renderUrbanScoreLabel(categoryScore));
 
-    scoreWrapper.appendChild(renderBar(counter, urbanObj.points));
+    scoreWrapper.appendChild(renderBar(categoryScore));
 
     return scoreWrapper;
 }
@@ -191,12 +284,11 @@ function roundScore(score) {
     return Math.round(score*10)/10;
 }
 
-cardsWrapper.appendChild(drawCard('HEALTHCARE', categoryCardArr));
-cardsWrapper.appendChild(drawCard('POLITICS', categoryCardArr));
-cardsWrapper.appendChild(drawCard('ECONOMY', categoryCardArr));
-
 suggestCities('N', urbanList);
 console.log("-------------------");
 
+console.log(document.getElementById("second-city-input").value);
+cardsWrapper.appendChild(drawCard(firstCityScores, 'First City'));
+cardsWrapper.appendChild(drawCard(secondCityScores, 'Second City'));
 
 testConsole();

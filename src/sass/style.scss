@@ -79,15 +79,18 @@ main {
             border: 1px solid gray;
             margin: 10px;
 
+            .city-title {
+                margin-bottom: 30px;
+            }
+
             .urban-scores-wrapper {
                 display: flex;
                 flex-flow: column nowrap;
-                justify-content: center;
                 height: 80%;
                 gap: 10px;
                 
                 .bar {
-                    background-color: lightgray;
+                    background-color: #eeeeee;
                     width: 90%;
                     height: 20px;
                     position: relative;
