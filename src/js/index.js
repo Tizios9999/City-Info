@@ -1,38 +1,53 @@
 import '../sass/style.scss';
 import testConsole from './secondary';
 
+// AXIOS Test
+
+const axios = require('axios');
+let urbanList = null;
+
+axios.get('https://api.teleport.org/api/urban_areas/').then(function (response) {
+    console.log(response.data._links["ua:item"]);
+    urbanList = response.data._links["ua:item"];
+}).catch(function (error){
+    console.log(error);
+}).then(function() {
+    console.log('Request ended.')
+});
+
+
 // Test variables
 
-let urbanList = [
-    {
-        "href": "https://api.teleport.org/api/urban_areas/slug:aarhus/", 
-        "name": "Aarhus"
-    }, 
-    {
-        "href": "https://api.teleport.org/api/urban_areas/slug:adelaide/", 
-        "name": "Adelaide"
-    }, 
-    {
-        "href": "https://api.teleport.org/api/urban_areas/slug:albuquerque/", 
-        "name": "Albuquerque"
-    }, 
-    {
-        "href": "https://api.teleport.org/api/urban_areas/slug:almaty/", 
-        "name": "Almaty"
-    }, 
-    {
-        "href": "https://api.teleport.org/api/urban_areas/slug:amsterdam/", 
-        "name": "Amsterdam"
-    }, 
-    {
-        "href": "https://api.teleport.org/api/urban_areas/slug:anchorage/", 
-        "name": "Anchorage"
-    }, 
-    {
-        "href": "https://api.teleport.org/api/urban_areas/slug:ankara/", 
-        "name": "Ankara"
-    }, 
-];
+// let urbanList = [
+//     {
+//         "href": "https://api.teleport.org/api/urban_areas/slug:aarhus/", 
+//         "name": "Aarhus"
+//     }, 
+//     {
+//         "href": "https://api.teleport.org/api/urban_areas/slug:adelaide/", 
+//         "name": "Adelaide"
+//     }, 
+//     {
+//         "href": "https://api.teleport.org/api/urban_areas/slug:albuquerque/", 
+//         "name": "Albuquerque"
+//     }, 
+//     {
+//         "href": "https://api.teleport.org/api/urban_areas/slug:almaty/", 
+//         "name": "Almaty"
+//     }, 
+//     {
+//         "href": "https://api.teleport.org/api/urban_areas/slug:amsterdam/", 
+//         "name": "Amsterdam"
+//     }, 
+//     {
+//         "href": "https://api.teleport.org/api/urban_areas/slug:anchorage/", 
+//         "name": "Anchorage"
+//     }, 
+//     {
+//         "href": "https://api.teleport.org/api/urban_areas/slug:ankara/", 
+//         "name": "Ankara"
+//     }, 
+// ];
 
 let firstCityScores = [
     {

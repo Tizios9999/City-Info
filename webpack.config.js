@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -14,6 +15,7 @@ module.exports = {
         },
     plugins: [
         new CleanWebpackPlugin(),
+        new NodePolyfillPlugin(),
         new HtmlWebpackPlugin({
             hash: true,
             title: 'City Info App',
@@ -25,7 +27,17 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    resolve: {
+        fallback: {
+            // "https": false,
+            // "http": false,
+            // "url": false,
+            // "zlib": false,
+            // "assert": false,
+        }
+    },
     module: {
+        
         rules: [
             {
                 test: /\.(s(a|c)ss)$/,
