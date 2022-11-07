@@ -147,6 +147,10 @@ function createHtmlElement(tag, classes = '', htmlContent = '') {
     return el;
 }
 
+function roundScore(score) {
+    return Math.round(score*10)/10;
+}
+
 // Search bar related functions
 
 function suggestCities(searchString, objArr) {
@@ -280,9 +284,7 @@ function renderScoreSection(categoryScore) {
     return scoreWrapper;
 }
 
-function roundScore(score) {
-    return Math.round(score*10)/10;
-}
+
 
 suggestCities('N', urbanList);
 console.log("-------------------");
