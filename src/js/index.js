@@ -10,6 +10,11 @@ let urbanList = null;
 const literalToPos = new Map();
 literalToPos.set('first', 0).set('second', 1);
 
+const posToLiteral = new Map();
+posToLiteral.set(0, 'first').set(1, 'second');
+
+let citiesToCompare = [null, null]; // These values will change depending on the input submitted for the city search
+
 // Test variables
 
 // let urbanList = [
@@ -144,7 +149,7 @@ let secondCityScores = [
     },
 ];
 
-let citiesToCompare = [null, null]; // These values will change depending on the input submitted for the city search
+let scoresArr = [null, null];
 
 // Helper functions
 
@@ -160,16 +165,35 @@ function roundScore(score) {
     return Math.round(score*10)/10;
 }
 
-// Search bar related functions
+// Selectors
 
-// function suggestCities(searchString, objArr) {
-    
-//     objArr.forEach(function(entry) { // will be a filter method later on that will return the list of results
-//         if (entry.name.toLowerCase().includes(searchString.toLowerCase())) {
-//             console.log(entry.name);
-//         }
-//     } )
-// }
+const headerElement = document.querySelector('.page-header');
+const cardsWrapper = document.querySelector('.cards-wrapper');
+
+// Forms Event Listeners
+
+headerElement.addEventListener('input', function(e) {
+    if (e.target.classList.contains("search-bar")) {
+        let filteredList = filterCities(e.target.value, urbanList);
+        let selectedList = e.target.id.replace("input", "suggestions");
+
+        createDatalistOptions(selectedList,filteredList);
+    }
+} );
+
+headerElement.addEventListener('click', function(e) {
+    if (e.target.classList.contains('search-btn')) {
+        e.preventDefault();
+        console.log(e.target.id);
+        let selectedInput = e.target.id.replace("submit-btn", "input");
+        let selectedPos = literalToPos.get(selectedInput.substring(0, selectedInput.indexOf('-')));
+
+        let scoresUrl = submitUrbanLink(document.getElementById(selectedInput).value, urbanList, selectedPos);
+        requestUrbanAreaScore(scoresUrl, selectedPos);
+    }
+} );
+
+// Search bar related functions
 
 function filterCities(searchString, objArr) {
     
@@ -197,46 +221,25 @@ function createDatalistOptions(datalistId, arr) {
 }
 
 function submitUrbanLink(cityName, cityList, pos) {
+
+    // Will return the link to access scores API endpoint from a city list matching the city name
+
     let found = false;
     console.log(cityName);
     for (let i=0; i<cityList.length; i++) {
         if (cityName == cityList[i].name) {
-            console.log(`${cityList[i].href}scores/`);
+            let scoresUrl = `${cityList[i].href}scores/`;
             found = true;
             citiesToCompare[pos] = cityName;
             console.log(citiesToCompare);
-            return;
+            console.log(scoresUrl);
+            return scoresUrl;
         }
     }
-    if (!found) console.log('Not found!');
+    if (!found) alert('City not found!');
 }
 
-// Selectors
-
-const headerElement = document.querySelector('.page-header');
-const cardsWrapper = document.querySelector('.cards-wrapper');
-
-// Forms Event Listeners
-
-headerElement.addEventListener('input', function(e) {
-    if (e.target.classList.contains("search-bar")) {
-        let filteredList = filterCities(e.target.value, urbanList);
-        let selectedList = e.target.id.replace("input", "suggestions");
-
-        createDatalistOptions(selectedList,filteredList);
-    }
-} );
-
-headerElement.addEventListener('click', function(e) {
-    if (e.target.classList.contains('search-btn')) {
-        e.preventDefault();
-        console.log(e.target.id);
-        let selectedInput = e.target.id.replace("submit-btn", "input");
-        let selectedPos = literalToPos.get(selectedInput.substring(0, selectedInput.indexOf('-')));
-
-        submitUrbanLink(document.getElementById(selectedInput).value, urbanList, selectedPos);
-    }
-} );
+// Draw functions
 
 function drawCard(scoresArr, name) {
 
@@ -302,10 +305,32 @@ function requestUrbanAreasList() {
     }).catch(function (error){
         console.log(error);
     }).then(function() {
-        console.log('Request ended.')
+        console.log('List request ended.')
     });
 };
 
+function requestUrbanAreaScore(scoresUrl, pos) {
+    axios.get(scoresUrl).then(function (response) {
+        console.log(response.data);
+        console.log(response.data["categories"]);
+        scoresArr[pos] = response.data["categories"];
+        console.log(scoresArr);
+
+        // Selects the corresponding card container where the card will be rendered
+        const cardContainer = document.querySelector(`.${posToLiteral.get(pos)}`);
+        
+        cardContainer.innerHTML = '';
+        cardContainer.appendChild(drawCard(scoresArr[pos], citiesToCompare[pos]));
+        if (cardContainer.classList.contains('not-visible')) {
+            cardContainer.classList.remove('not-visible');
+        }
+
+    }).catch(function (error){
+        console.log(error);
+    }).then(function() {
+        console.log('Score request ended.')
+    });
+};
 
 
 // Code execution
@@ -314,7 +339,6 @@ requestUrbanAreasList();
 console.log("-------------------");
 
 console.log(document.getElementById("second-city-input").value);
-cardsWrapper.appendChild(drawCard(firstCityScores, 'First City'));
-cardsWrapper.appendChild(drawCard(secondCityScores, 'Second City'));
+// cardsWrapper.appendChild(drawCard(firstCityScores, 'First City'));
 
 testConsole();

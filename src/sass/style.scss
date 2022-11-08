@@ -3,12 +3,22 @@ $second-color: rgb(170, 57, 57);
 $third-color: rgb(45, 136, 45);
 $fourth-color: rgb(170, 108, 57);
 
+// General settings
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+// Helper classes
+
+.not-visible {
+    display: none;
+}
+
+// Structure
 
 header {
     width: 100%;
@@ -100,16 +110,6 @@ main {
                         overflow: hidden;
                         height: 100%;
                         
-                    }
-    
-                    .urban-0 {
-                        background-color: $second-color;
-                        width: 85%;
-                    }
-    
-                    .urban-1 {
-                        background-color: $fourth-color;
-                        width: 70%;
                     }
             }
             
