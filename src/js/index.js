@@ -5,151 +5,19 @@ import testConsole from './secondary';
 
 const axios = require('axios');
 let urbanList = null;
+let scoresArr = [null, null];
 
 // The following Map object will link position names to their respective array positions
 const literalToPos = new Map();
 literalToPos.set('first', 0).set('second', 1);
 
+// The following Map object will link the array position to their respective positions name
 const posToLiteral = new Map();
 posToLiteral.set(0, 'first').set(1, 'second');
 
 let citiesToCompare = [null, null]; // These values will change depending on the input submitted for the city search
 
-// Test variables
 
-// let urbanList = [
-//     {
-//         "href": "https://api.teleport.org/api/urban_areas/slug:aarhus/", 
-//         "name": "Aarhus"
-//     }, 
-//     {
-//         "href": "https://api.teleport.org/api/urban_areas/slug:adelaide/", 
-//         "name": "Adelaide"
-//     }, 
-//     {
-//         "href": "https://api.teleport.org/api/urban_areas/slug:albuquerque/", 
-//         "name": "Albuquerque"
-//     }, 
-//     {
-//         "href": "https://api.teleport.org/api/urban_areas/slug:almaty/", 
-//         "name": "Almaty"
-//     }, 
-//     {
-//         "href": "https://api.teleport.org/api/urban_areas/slug:amsterdam/", 
-//         "name": "Amsterdam"
-//     }, 
-//     {
-//         "href": "https://api.teleport.org/api/urban_areas/slug:anchorage/", 
-//         "name": "Anchorage"
-//     }, 
-//     {
-//         "href": "https://api.teleport.org/api/urban_areas/slug:ankara/", 
-//         "name": "Ankara"
-//     }, 
-// ];
-
-let firstCityScores = [
-    {
-        "color":"#040445",
-        "name":"Housing",
-        "score_out_of_10": 6.3095, 
-    },
-    {
-        "color":"#f3c32c",
-        "name":"Cost of Living",
-        "score_out_of_10": 4.692,
-    },
-    {
-        "color":"#34565c",
-        "name":"Startups",
-        "score_out_of_10": 3.1365,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"Venture Capital",
-        "score_out_of_10": 2.64,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"Travel Connectivity",
-        "score_out_of_10": 1.17765,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"Business Freedom",
-        "score_out_of_10": 9.399666667,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"TEST X",
-        "score_out_of_10": 2,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"TEST Y",
-        "score_out_of_10": 5.512,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"TEST Y",
-        "score_out_of_10": 5.512,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"TEST Y",
-        "score_out_of_10": 5.512,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"TEST Y",
-        "score_out_of_10": 5.512,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"TEST Y",
-        "score_out_of_10": 5.512,
-    },
-];
-
-let secondCityScores = [
-    {
-        "color":"#f3c32c",
-        "name":"Housing",
-        "score_out_of_10": 5.1945, 
-    },
-    {
-        "color":"#f3c32c",
-        "name":"Cost of Living",
-        "score_out_of_10": 4.801,
-    },
-    {
-        "color":"#222222",
-        "name":"Startups",
-        "score_out_of_10": 5.1945,
-    },
-    {
-        "color":"#444444",
-        "name":"Venture Capital",
-        "score_out_of_10": 3.286,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"Travel Connectivity",
-        "score_out_of_10": 6.683,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"Business Freedom",
-        "score_out_of_10": 5.512,
-    },
-    {
-        "color":"#f3c32c",
-        "name":"TEST Y",
-        "score_out_of_10": 5.512,
-    },
-];
-
-let scoresArr = [null, null];
 
 // Helper functions
 
@@ -168,9 +36,8 @@ function roundScore(score) {
 // Selectors
 
 const headerElement = document.querySelector('.page-header');
-const cardsWrapper = document.querySelector('.cards-wrapper');
 
-// Forms Event Listeners
+// Event Listeners
 
 headerElement.addEventListener('input', function(e) {
     if (e.target.classList.contains("search-bar")) {
@@ -317,8 +184,8 @@ function requestUrbanAreaScore(scoresUrl, pos) {
         console.log(scoresArr);
 
         // Selects the corresponding card container where the card will be rendered
-        const cardContainer = document.querySelector(`.${posToLiteral.get(pos)}`);
-        
+        const cardContainer = document.querySelector(`.${posToLiteral.get(pos)}-card-container`);
+
         cardContainer.innerHTML = '';
         cardContainer.appendChild(drawCard(scoresArr[pos], citiesToCompare[pos]));
         if (cardContainer.classList.contains('not-visible')) {
@@ -336,9 +203,5 @@ function requestUrbanAreaScore(scoresUrl, pos) {
 // Code execution
 
 requestUrbanAreasList();
-console.log("-------------------");
-
-console.log(document.getElementById("second-city-input").value);
-// cardsWrapper.appendChild(drawCard(firstCityScores, 'First City'));
 
 testConsole();
