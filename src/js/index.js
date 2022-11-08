@@ -6,15 +6,9 @@ import testConsole from './secondary';
 const axios = require('axios');
 let urbanList = null;
 
-axios.get('https://api.teleport.org/api/urban_areas/').then(function (response) {
-    console.log(response.data._links["ua:item"]);
-    urbanList = response.data._links["ua:item"];
-}).catch(function (error){
-    console.log(error);
-}).then(function() {
-    console.log('Request ended.')
-});
-
+// The following Map object will link position names to their respective array positions
+const literalToPos = new Map();
+literalToPos.set('first', 0).set('second', 1);
 
 // Test variables
 
@@ -168,14 +162,14 @@ function roundScore(score) {
 
 // Search bar related functions
 
-function suggestCities(searchString, objArr) {
+// function suggestCities(searchString, objArr) {
     
-    objArr.forEach(function(entry) { // will be a filter method later on that will return the list of results
-        if (entry.name.toLowerCase().includes(searchString.toLowerCase())) {
-            console.log(entry.name);
-        }
-    } )
-}
+//     objArr.forEach(function(entry) { // will be a filter method later on that will return the list of results
+//         if (entry.name.toLowerCase().includes(searchString.toLowerCase())) {
+//             console.log(entry.name);
+//         }
+//     } )
+// }
 
 function filterCities(searchString, objArr) {
     
@@ -227,8 +221,8 @@ const cardsWrapper = document.querySelector('.cards-wrapper');
 headerElement.addEventListener('input', function(e) {
     if (e.target.classList.contains("search-bar")) {
         let filteredList = filterCities(e.target.value, urbanList);
-        let selectedList = e.target.id == "first-city-input" ? "search-city-suggestions" : "second-city-suggestions";
-        
+        let selectedList = e.target.id.replace("input", "suggestions");
+
         createDatalistOptions(selectedList,filteredList);
     }
 } );
@@ -237,8 +231,8 @@ headerElement.addEventListener('click', function(e) {
     if (e.target.classList.contains('search-btn')) {
         e.preventDefault();
         console.log(e.target.id);
-        let selectedInput = e.target.id == "first-city-submit-btn" ? "first-city-input" : "second-city-input";
-        let selectedPos = selectedInput == "first-city-input" ? 0 : 1;
+        let selectedInput = e.target.id.replace("submit-btn", "input");
+        let selectedPos = literalToPos.get(selectedInput.substring(0, selectedInput.indexOf('-')));
 
         submitUrbanLink(document.getElementById(selectedInput).value, urbanList, selectedPos);
     }
@@ -299,9 +293,24 @@ function renderScoreSection(categoryScore) {
     return scoreWrapper;
 }
 
+// API requests
+
+function requestUrbanAreasList() {
+    axios.get('https://api.teleport.org/api/urban_areas/').then(function (response) {
+        console.log(response.data._links["ua:item"]);
+        urbanList = response.data._links["ua:item"];
+    }).catch(function (error){
+        console.log(error);
+    }).then(function() {
+        console.log('Request ended.')
+    });
+};
 
 
-suggestCities('N', urbanList);
+
+// Code execution
+
+requestUrbanAreasList();
 console.log("-------------------");
 
 console.log(document.getElementById("second-city-input").value);
