@@ -44,55 +44,15 @@ headerElement.addEventListener('click', function(e) {
     }
 } );
 
-// Search bar related functions
-
-function filterCities(searchString, objArr) {
-    
-    if (searchString == "") return;
-    let filteredList = objArr.map(objArr => objArr.name).filter(entry => entry.toLowerCase().includes(searchString.toLowerCase()));
-    
-    if (filteredList.length == 1 && filteredList[0].toLowerCase() === searchString.toLowerCase()) return; // this will ensure that the list of suggestions will be empty when I don't need it anymore.
-    
-    return filteredList;
-    } 
-
-function createDatalistOptions(datalistId, arr) { 
-    const datalist = document.getElementById(datalistId);
-    datalist.innerHTML = ""; // the datalist options are erased first
-
-    if (!arr) return;
-
-    arr.forEach(function(item) {
-        let option = document.createElement('option');
-        option.value = item;
-        datalist.appendChild(option);
-    })
-
-
-}
-
-function submitUrbanLink(cityName, cityList, pos) {
-
-    // Will return the link to access scores API endpoint from a city list matching the city name
-
-    let found = false;
-    console.log(cityName);
-    for (let i=0; i<cityList.length; i++) {
-        if (cityName == cityList[i].name) {
-            let scoresUrl = `${cityList[i].href}scores/`;
-            found = true;
-            citiesToCompare[pos] = cityName;
-            console.log(citiesToCompare);
-            console.log(scoresUrl);
-            return scoresUrl;
-        }
+headerElement.addEventListener('focusin', function(e) {
+    if (e.target.classList.contains('search-bar')) {
+        if (!urbanList) requestUrbanAreasList();
     }
-    if (!found) alert('City not found!');
-}
+} );
 
 // Draw functions
 
-function drawCard(scoresArr, name) {
+export function drawCard(scoresArr, name) {
 
     const card = createHtmlElement('div', 'card');
     const cityTitle = createHtmlElement('h4', 'city-title', name);
@@ -147,6 +107,52 @@ function renderScoreSection(categoryScore) {
     return scoreWrapper;
 }
 
+// Search bar related functions
+
+function filterCities(searchString, objArr) {
+    
+    if (searchString == "") return;
+    let filteredList = objArr.map(objArr => objArr.name).filter(entry => entry.toLowerCase().includes(searchString.toLowerCase()));
+    
+    if (filteredList.length == 1 && filteredList[0].toLowerCase() === searchString.toLowerCase()) return; // this will ensure that the list of suggestions will be empty when I don't need it anymore.
+    
+    return filteredList;
+    } 
+
+function createDatalistOptions(datalistId, arr) { 
+    const datalist = document.getElementById(datalistId);
+    datalist.innerHTML = ""; // the datalist options are erased first
+
+    if (!arr) return;
+
+    arr.forEach(function(item) {
+        let option = document.createElement('option');
+        option.value = item;
+        datalist.appendChild(option);
+    })
+
+
+}
+
+function submitUrbanLink(cityName, cityList, pos) {
+
+    // Will return the link to access scores API endpoint from a city list matching the city name
+
+    let found = false;
+    console.log(cityName);
+    for (let i=0; i<cityList.length; i++) {
+        if (cityName == cityList[i].name) {
+            let scoresUrl = `${cityList[i].href}scores/`;
+            found = true;
+            citiesToCompare[pos] = cityName;
+            console.log(citiesToCompare);
+            console.log(scoresUrl);
+            return scoresUrl;
+        }
+    }
+    if (!found) alert('City not found!');
+}
+
 // API requests
 
 function requestUrbanAreasList() {
@@ -162,10 +168,8 @@ function requestUrbanAreasList() {
 
 function requestUrbanAreaScore(scoresUrl, pos) {
     axios.get(scoresUrl).then(function (response) {
-        console.log(response.data);
-        console.log(response.data["categories"]);
+
         scoresArr[pos] = response.data["categories"];
-        console.log(scoresArr);
 
         // Selects the corresponding card container where the card will be rendered
         const cardContainer = document.querySelector(`.${posToLiteral.get(pos)}-card-container`);
@@ -192,5 +196,3 @@ function requestUrbanAreaScore(scoresUrl, pos) {
 
 
 // Code execution
-
-requestUrbanAreasList();

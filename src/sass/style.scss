@@ -21,7 +21,7 @@ $second-color: rgb(45, 136, 45);
 header {
     width: 100%;
     .title-wrapper {
-        background-color: $first-color;
+        background-color: $first-color !important;
         margin: 0 auto;
         h1 {
             color: white;
@@ -36,8 +36,8 @@ header {
         margin: 20px auto;
     }
 
+
     .search-btn-wrapper {
-        
         form {
             display: flex;
             justify-content: center;
