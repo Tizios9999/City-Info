@@ -1,7 +1,5 @@
 $first-color: rgb(34, 102, 102);
-$second-color: rgb(170, 57, 57);
-$third-color: rgb(45, 136, 45);
-$fourth-color: rgb(170, 108, 57);
+$second-color: rgb(45, 136, 45);
 
 // General settings
 
@@ -49,7 +47,7 @@ header {
             border: 1px solid black;
             border-radius: 5px;
             height: 30px;
-            background-color: $third-color;
+            background-color: $second-color;
             line-height: 30px;
             padding: 0 20px;
             color: white;
@@ -122,8 +120,4 @@ main {
         padding: 10px;
         margin: 10px;
     }
-}
-
-.test-class {
-    color: $second-color;
 }
