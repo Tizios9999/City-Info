@@ -17,8 +17,6 @@ posToLiteral.set(0, 'first').set(1, 'second');
 
 let citiesToCompare = [null, null]; // These values will change depending on the input submitted for the city search
 
-
-
 // Helper functions
 
 function createHtmlElement(tag, classes = '', htmlContent = '') {
@@ -188,10 +186,17 @@ function requestUrbanAreaScore(scoresUrl, pos) {
 
         cardContainer.innerHTML = '';
         cardContainer.appendChild(drawCard(scoresArr[pos], citiesToCompare[pos]));
+       
         if (cardContainer.classList.contains('not-visible')) {
             cardContainer.classList.remove('not-visible');
         }
 
+        const summaryContainer = document.querySelector(`.${posToLiteral.get(pos)}-summary-container`);
+        summaryContainer.innerHTML = response.data["summary"];
+        
+        if (summaryContainer.classList.contains('not-visible')) {
+            summaryContainer.classList.remove('not-visible');
+        }
     }).catch(function (error){
         console.log(error);
     }).then(function() {
