@@ -7,7 +7,7 @@ module.exports = {
     mode: 'development',
     entry: {
         app: './src/js/index.js',
-        secondary: './src/js/secondary.js',
+        utilities: './src/js/utilities.js',
     },
     devtool: 'inline-source-map',
     devServer: {

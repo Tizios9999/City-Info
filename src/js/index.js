@@ -1,5 +1,5 @@
 import '../sass/style.scss';
-import testConsole from './secondary';
+import { createHtmlElement, roundScore } from './utilities';
 
 // AXIOS Test
 
@@ -16,20 +16,6 @@ const posToLiteral = new Map();
 posToLiteral.set(0, 'first').set(1, 'second');
 
 let citiesToCompare = [null, null]; // These values will change depending on the input submitted for the city search
-
-// Helper functions
-
-function createHtmlElement(tag, classes = '', htmlContent = '') {
-    const el = document.createElement(`${tag}`);
-    if (classes) el.className = classes;
-    el.innerHTML = htmlContent;
-
-    return el;
-}
-
-function roundScore(score) {
-    return Math.round(score*10)/10;
-}
 
 // Selectors
 
@@ -208,5 +194,3 @@ function requestUrbanAreaScore(scoresUrl, pos) {
 // Code execution
 
 requestUrbanAreasList();
-
-testConsole();
