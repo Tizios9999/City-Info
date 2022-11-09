@@ -35,7 +35,7 @@ headerElement.addEventListener('input', function(e) {
 headerElement.addEventListener('click', function(e) {
     if (e.target.classList.contains('search-btn')) {
         e.preventDefault();
-        console.log(e.target.id);
+
         let selectedInput = e.target.id.replace("submit-btn", "input");
         let selectedPos = literalToPos.get(selectedInput.substring(0, selectedInput.indexOf('-')));
 
@@ -139,14 +139,11 @@ function submitUrbanLink(cityName, cityList, pos) {
     // Will return the link to access scores API endpoint from a city list matching the city name
 
     let found = false;
-    console.log(cityName);
     for (let i=0; i<cityList.length; i++) {
         if (cityName == cityList[i].name) {
             let scoresUrl = `${cityList[i].href}scores/`;
             found = true;
             citiesToCompare[pos] = cityName;
-            console.log(citiesToCompare);
-            console.log(scoresUrl);
             return scoresUrl;
         }
     }
@@ -157,12 +154,9 @@ function submitUrbanLink(cityName, cityList, pos) {
 
 function requestUrbanAreasList() {
     axios.get('https://api.teleport.org/api/urban_areas/').then(function (response) {
-        console.log(response.data._links["ua:item"]);
         urbanList = response.data._links["ua:item"];
     }).catch(function (error){
         console.log(error);
-    }).then(function() {
-        console.log('List request ended.')
     });
 };
 
@@ -189,10 +183,5 @@ function requestUrbanAreaScore(scoresUrl, pos) {
         }
     }).catch(function (error){
         console.log(error);
-    }).then(function() {
-        console.log('Score request ended.')
     });
 };
-
-
-// Code execution
