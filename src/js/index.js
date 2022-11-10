@@ -19,6 +19,7 @@ posToLiteral.set(0, 'first').set(1, 'second');
 // Selectors
 
 const headerElement = document.querySelector('.page-header');
+const compareCityWrapper = document.querySelector('.compare-city-wrapper');
 
 // Event Listeners
 
@@ -40,6 +41,10 @@ headerElement.addEventListener('click', function(e) {
         let selectedPos = literalToPos.get(selectedInput.substring(0, selectedInput.indexOf('-')));
         let inputElement = document.getElementById(selectedInput)
 
+        if (!activeCities.includes(inputElement.value)) {
+
+        
+
         try {
             if (inputElement.value === "") {
                 throw new Error('Please insert a value');
@@ -47,15 +52,21 @@ headerElement.addEventListener('click', function(e) {
             } else {
             renderErrorLabel('', selectedPos);
             let scoresUrl = submitUrbanLink(inputElement.value, urbanList, selectedPos);
-            requestUrbanAreaScore(scoresUrl, selectedPos);
+            if (!scoresUrl) {
+                throw new Error('Urban area not found');
+            } else {
+                requestUrbanAreaScore(scoresUrl, selectedPos);
+                if (compareCityWrapper.classList.contains('not-visible')) compareCityWrapper.classList.remove('not-visible');
+            }
+            
             }
         } catch(err) {
-            renderErrorLabel(err, selectedPos);
+            renderErrorLabel(err.message, selectedPos);
         }
 
         
 
-        
+    }
     }
 
 } );
@@ -167,11 +178,11 @@ try {
         }
     }
     if (!found) {
-        throw new Error('City not found!')
+        throw new Error('Urban area not found!');
     };
 
 } catch(err) {
-    renderErrorLabel('City not found!', pos);
+    renderErrorLabel(err.message, pos);
 }
 }
 
@@ -187,6 +198,7 @@ function requestUrbanAreasList() {
 
 function requestUrbanAreaScore(scoresUrl, pos) {
     axios.get(scoresUrl).then(function (response) {
+
         scoresArr[pos] = response.data["categories"];
 
         // Selects the corresponding card container where the card will be rendered
@@ -206,13 +218,13 @@ function requestUrbanAreaScore(scoresUrl, pos) {
             summaryContainer.classList.remove('not-visible');
         }
     }).catch(function (error){
-        renderErrorLabel(error, pos);
+        renderErrorLabel(error.message, pos);
     });
 };
 
 // Error handling function
 
-function renderErrorLabel(error, pos) {
+function renderErrorLabel(message, pos) {
     const errorLabel = document.querySelector(`.${posToLiteral.get(pos)}-error`);
-    errorLabel.innerHTML = error;
+    errorLabel.innerHTML = message;
 }
