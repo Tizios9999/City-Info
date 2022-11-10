@@ -18,7 +18,7 @@ module.exports = {
         new NodePolyfillPlugin(),
         new HtmlWebpackPlugin({
             hash: true,
-            title: 'City Info App',
+            title: 'Urban Area Info App',
             template: './src/index.html',
             filename: '../dist/index.html'
         })

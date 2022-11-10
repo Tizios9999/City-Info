@@ -6,6 +6,7 @@ import { createHtmlElement, roundScore } from './utilities';
 const axios = require('axios');
 let urbanList = null;
 let scoresArr = [null, null];
+let activeCities = [null, null]; // These values will change depending on the input submitted for the city search
 
 // The following Map object will link position names to their respective array positions
 const literalToPos = new Map();
@@ -14,8 +15,6 @@ literalToPos.set('first', 0).set('second', 1);
 // The following Map object will link the array position to their respective positions name
 const posToLiteral = new Map();
 posToLiteral.set(0, 'first').set(1, 'second');
-
-let citiesToCompare = [null, null]; // These values will change depending on the input submitted for the city search
 
 // Selectors
 
@@ -33,15 +32,32 @@ headerElement.addEventListener('input', function(e) {
 } );
 
 headerElement.addEventListener('click', function(e) {
+   
     if (e.target.classList.contains('search-btn')) {
         e.preventDefault();
 
         let selectedInput = e.target.id.replace("submit-btn", "input");
         let selectedPos = literalToPos.get(selectedInput.substring(0, selectedInput.indexOf('-')));
+        let inputElement = document.getElementById(selectedInput)
 
-        let scoresUrl = submitUrbanLink(document.getElementById(selectedInput).value, urbanList, selectedPos);
-        requestUrbanAreaScore(scoresUrl, selectedPos);
+        try {
+            if (inputElement.value === "") {
+                throw new Error('Please insert a value');
+    
+            } else {
+            renderErrorLabel('', selectedPos);
+            let scoresUrl = submitUrbanLink(inputElement.value, urbanList, selectedPos);
+            requestUrbanAreaScore(scoresUrl, selectedPos);
+            }
+        } catch(err) {
+            renderErrorLabel(err, selectedPos);
+        }
+
+        
+
+        
     }
+
 } );
 
 headerElement.addEventListener('focusin', function(e) {
@@ -55,7 +71,7 @@ headerElement.addEventListener('focusin', function(e) {
 export function drawCard(scoresArr, name) {
 
     const card = createHtmlElement('div', 'card');
-    const cityTitle = createHtmlElement('h4', 'city-title', name);
+    const cityTitle = createHtmlElement('h4', 'city-title', name.toUpperCase());
     const urbanScoresWrapper = createHtmlElement('div', 'urban-scores-wrapper');
     card.append(cityTitle, urbanScoresWrapper);
 
@@ -111,10 +127,10 @@ function renderScoreSection(categoryScore) {
 
 function filterCities(searchString, objArr) {
     
-    if (searchString == "") return;
+    if (searchString === "") return;
     let filteredList = objArr.map(objArr => objArr.name).filter(entry => entry.toLowerCase().includes(searchString.toLowerCase()));
     
-    if (filteredList.length == 1 && filteredList[0].toLowerCase() === searchString.toLowerCase()) return; // this will ensure that the list of suggestions will be empty when I don't need it anymore.
+    if (filteredList.length === 1 && filteredList[0].toLowerCase() === searchString.toLowerCase()) return; // this will ensure that the list of suggestions will be empty when I don't need it anymore.
     
     return filteredList;
     } 
@@ -136,18 +152,27 @@ function createDatalistOptions(datalistId, arr) {
 
 function submitUrbanLink(cityName, cityList, pos) {
 
+try {
+    
+
     // Will return the link to access scores API endpoint from a city list matching the city name
 
     let found = false;
     for (let i=0; i<cityList.length; i++) {
-        if (cityName == cityList[i].name) {
+        if (cityName.toLowerCase() === cityList[i].name.toLowerCase()) {
             let scoresUrl = `${cityList[i].href}scores/`;
             found = true;
-            citiesToCompare[pos] = cityName;
+            activeCities[pos] = cityName;
             return scoresUrl;
         }
     }
-    if (!found) alert('City not found!');
+    if (!found) {
+        throw new Error('City not found!')
+    };
+
+} catch(err) {
+    renderErrorLabel('City not found!', pos);
+}
 }
 
 // API requests
@@ -162,26 +187,32 @@ function requestUrbanAreasList() {
 
 function requestUrbanAreaScore(scoresUrl, pos) {
     axios.get(scoresUrl).then(function (response) {
-
         scoresArr[pos] = response.data["categories"];
 
         // Selects the corresponding card container where the card will be rendered
         const cardContainer = document.querySelector(`.${posToLiteral.get(pos)}-card-container`);
 
         cardContainer.innerHTML = '';
-        cardContainer.appendChild(drawCard(scoresArr[pos], citiesToCompare[pos]));
+        cardContainer.appendChild(drawCard(scoresArr[pos], activeCities[pos]));
        
         if (cardContainer.classList.contains('not-visible')) {
             cardContainer.classList.remove('not-visible');
         }
 
         const summaryContainer = document.querySelector(`.${posToLiteral.get(pos)}-summary-container`);
-        summaryContainer.innerHTML = response.data["summary"];
+        summaryContainer.innerHTML = `${response.data["summary"]} <br /> Teleport city score: <strong>${roundScore(response.data["teleport_city_score"])}</strong> `;
         
         if (summaryContainer.classList.contains('not-visible')) {
             summaryContainer.classList.remove('not-visible');
         }
     }).catch(function (error){
-        console.log(error);
+        renderErrorLabel(error, pos);
     });
 };
+
+// Error handling function
+
+function renderErrorLabel(error, pos) {
+    const errorLabel = document.querySelector(`.${posToLiteral.get(pos)}-error`);
+    errorLabel.innerHTML = error;
+}
