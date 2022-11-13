@@ -152,9 +152,11 @@ This is a course project aimed to valuate my personal skills, so right now it's 
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Davide Santonocito - davide.santonocito@outlook.com
 
-Project Link: [https://tizios9999.github.io/City-Info/](https://tizios9999.github.io/City-Info/)
+Project Link: [https://github.com/Tizios9999/City-Info/](https://github.com/Tizios9999/City-Info/)
+
+Live at: [https://tizios9999.github.io/City-Info/](https://tizios9999.github.io/City-Info/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
