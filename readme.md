@@ -72,9 +72,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `Tizios9999`, `City-Info`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+[![Product Name Screen Shot][product-screenshot]](https://tizios9999.github.io/City-Info/dist)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,16 +102,15 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/Tizios9999/City-Info.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+3. Enter your API in `config.js`
    ```js
    const API_KEY = "ENTER YOUR API";
    ```
@@ -124,7 +121,9 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+You can search for any Urban Area from the search bar. Once the submit button is clicked the info about the selected area will be shown.
+
+A good way to use this app is to select two urban areas, so the user can judge by comparison.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -185,5 +184,5 @@ Live at: [https://tizios9999.github.io/City-Info/dist](https://tizios9999.github
 [license-shield]: https://img.shields.io/github/license/Tizios9999/City-Info.svg?style=for-the-badge
 [license-url]: https://github.com/Tizios9999/City-Info/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://linkedin.com/in/davide-santonocito-36ab84170
 [product-screenshot]: src/img/preview.png
