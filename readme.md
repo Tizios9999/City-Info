@@ -33,7 +33,7 @@
     <a href="https://github.com/Tizios9999/City-Info"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://tizios9999.github.io/City-Info/">View Demo</a>
+    <a href="https://tizios9999.github.io/City-Info/dist">View Demo</a>
     ·
     <a href="https://github.com/Tizios9999/City-Info/issues">Report Bug</a>
     ·
@@ -156,7 +156,7 @@ Davide Santonocito - davide.santonocito@outlook.com
 
 Project Link: [https://github.com/Tizios9999/City-Info/](https://github.com/Tizios9999/City-Info/)
 
-Live at: [https://tizios9999.github.io/City-Info/](https://tizios9999.github.io/City-Info/)
+Live at: [https://tizios9999.github.io/City-Info/dist](https://tizios9999.github.io/City-Info/dist)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
