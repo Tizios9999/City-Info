@@ -33,7 +33,7 @@
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://tizios9999.github.io/City-Info/">View Demo</a>
     ·
     <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
     ·
@@ -133,8 +133,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [ ] Search for a Urban Area from Teleport API.
-- [ ] Compare the scores from an Urban Area to a second one.
+- [x] Search for a Urban Area from Teleport API.
+- [x] Compare the scores from an Urban Area to a second one.
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
