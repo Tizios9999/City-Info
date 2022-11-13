@@ -22,13 +22,14 @@
 <br />
 <div align="center">
   <a href="https://github.com/Tizios9999/City-Info">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://www.kindpng.com/picc/m/160-1608792_circle-document-icon-png-transparent-png.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Urban Area City Info</h3>
 
   <p align="center">
-    project_description
+    This app will let you evaluate the quality of life of one or two big urban areas at once by browsing their scores on various categories. 
+    The scores are kindly provided by <a href="https://teleport.org/">Teleport</a> APIs.
     <br />
     <a href="https://github.com/Tizios9999/City-Info"><strong>Explore the docs »</strong></a>
     <br />
@@ -144,7 +145,7 @@ See the [open issues](https://github.com/Tizios9999/City-Info/issues) for a full
 
 ## Contributing
 
-This is a course project aimed to valuate my personal skills, so right now it's closed for contributions. Any advice is always kindly appreciated though!
+This is a course project aimed to evaluate my personal skills, so right now it's closed for contributions. Any advice is always kindly appreciated though!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
