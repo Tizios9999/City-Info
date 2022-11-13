@@ -125,16 +125,14 @@ You can search for any Urban Area from the search bar. Once the submit button is
 
 A good way to use this app is to select two urban areas, so the user can judge by comparison.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-- [] Search for a Urban Area from Teleport API.
-- [] Compare the scores from an Urban Area to a second one.
+- [x] Search for a Urban Area from Teleport API.
+- [x] Compare the scores from an Urban Area to a second one.
 
 See the [open issues](https://github.com/Tizios9999/City-Info/issues) for a full list of proposed features (and known issues).
 
