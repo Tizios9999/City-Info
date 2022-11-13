@@ -56,7 +56,10 @@ headerElement.addEventListener('click', function(e) {
                 throw new Error('Urban area not found');
             } else {
                 requestUrbanAreaScore(scoresUrl, selectedPos);
-                if (compareCityWrapper.classList.contains('not-visible')) compareCityWrapper.classList.remove('not-visible');
+                if (compareCityWrapper.classList.contains('not-visible')) {
+                    compareCityWrapper.classList.remove('not-visible');
+                    compareCityWrapper.classList.add('slide-down');
+                }
             }
             
             }
