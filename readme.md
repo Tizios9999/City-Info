@@ -154,7 +154,7 @@ This is a course project aimed to valuate my personal skills, so right now it's 
 
 Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://tizios9999.github.io/City-Info/](https://tizios9999.github.io/City-Info/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
