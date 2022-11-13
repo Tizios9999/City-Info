@@ -55,7 +55,6 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -63,7 +62,6 @@
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -87,17 +85,7 @@
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+To have a working copy of the project, you can clone it from here.
 
 ### Installation
 
@@ -105,13 +93,9 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone https://github.com/Tizios9999/City-Info.git
    ```
-2. Install NPM packages
+2. Install NPM packages from the package.json already inside the repo.
    ```sh
    npm install
-   ```
-3. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -154,16 +138,6 @@ Davide Santonocito - davide.santonocito@outlook.com
 Project Link: [https://github.com/Tizios9999/City-Info/](https://github.com/Tizios9999/City-Info/)
 
 Live at: [https://tizios9999.github.io/City-Info/dist](https://tizios9999.github.io/City-Info/dist)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- []()
-- []()
-- []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
